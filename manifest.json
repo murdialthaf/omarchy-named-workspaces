@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "author": "murdi",
   "license": "MIT",
-  "description": "HyDe-style workspace switcher showing only active/occupied workspaces with the focused window title next to each number",
+  "description": "HyDe-style workspace switcher showing only active/occupied workspaces with the focused window name next to each number",
   "kinds": [
     "bar-widget"
   ],
@@ -14,7 +14,7 @@
   },
   "barWidget": {
     "displayName": "Named Workspaces",
-    "description": "HyDe-style workspace switcher showing only active/occupied workspaces with the focused window title next to each number",
+    "description": "HyDe-style workspace switcher showing only active/occupied workspaces with the focused window name next to each number",
     "category": "Compositor",
     "allowMultiple": false,
     "defaultSection": "left",

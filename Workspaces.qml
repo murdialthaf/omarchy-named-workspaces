@@ -46,6 +46,34 @@ BarWidget {
     return ""
   }
 
+  function appName(appId) {
+    if (!appId) return ""
+    var id = appId.toLowerCase()
+    if (id === "google-chrome" || id === "google-chrome-stable") return "Google Chrome"
+    if (id === "chromium") return "Chromium"
+    if (id === "firefox" || id === "firefox-esr" || id === "firefoxdeveloperedition" || id === "firefoxnightly" || id === "librewolf") return "Firefox"
+    if (id === "code" || id === "code-oss" || id === "vscode" || id === "com.visualstudio.code") return "Code"
+    if (id === "dolphin" || id === "org.kde.dolphin") return "Dolphin"
+    if (id === "spotify") return "Spotify"
+    if (id === "steam") return "Steam"
+    if (id === "discord" || id === "com.discordapp.Discord") return "Discord"
+    if (id === "obs" || id === "com.obsproject.studio") return "OBS"
+    if (id === "netflix") return "Netflix"
+    if (id === "github" || id === "io.github.shiftey.desktop") return "Github"
+    if (id === "foot" || id === "kitty" || id === "alacritty" || id === "ghostty" || id === "wezterm" || id === "konsole") return "Terminal"
+    return ""
+  }
+
+  function displayName(toplevel) {
+    if (!toplevel) return ""
+    var appId = toplevel.wayland ? toplevel.wayland.appId : ""
+    var app = appName(appId)
+    var title = toplevel.title ? toplevel.title : ""
+    if (title === "") return app !== "" ? app : appId
+    if (app !== "" && (title.toLowerCase().endsWith(app.toLowerCase()) || title.toLowerCase() === appId.toLowerCase())) return app
+    return title
+  }
+
   function containsAddress(toplevels, address) {
     if (!address) return false
     for (var i = 0; i < toplevels.length; i++) {
@@ -109,7 +137,8 @@ BarWidget {
         readonly property var lastEntry: root.lastFocusedByWorkspace[modelData]
         readonly property string lastTitle: lastEntry ? lastEntry.title : ""
         readonly property bool lastValid: lastTitle !== "" && root.containsAddress(toplevels, lastEntry ? lastEntry.address : "")
-        readonly property string windowTitle: lastValid ? lastTitle : (toplevels.length > 0 ? root.titleOf(toplevels[0]) : "")
+        readonly property string windowTitle: lastValid ? root.displayName(lastEntry) : (toplevels.length > 0 ? root.displayName(toplevels[0]) : "")
+        readonly property string fullTitle: lastValid ? root.titleOf(lastEntry) : (toplevels.length > 0 ? root.titleOf(toplevels[0]) : "")
         readonly property bool occupied: toplevels.length > 0
         readonly property bool focused: workspace !== null && workspace.focused
 
@@ -122,7 +151,7 @@ BarWidget {
           hoverEnabled: true
           cursorShape: Qt.PointingHandCursor
           onClicked: root.focusWorkspace(modelData)
-          onEntered: if (root.bar && chip.windowTitle !== "") root.bar.showTooltip(chip, chip.windowTitle)
+          onEntered: if (root.bar && chip.fullTitle !== "") root.bar.showTooltip(chip, chip.fullTitle)
           onExited: if (root.bar) root.bar.hideTooltip(chip)
         }
 

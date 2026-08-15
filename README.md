@@ -2,7 +2,7 @@
 
 A HyDe-style workspace switcher for the Omarchy bar. Instead of always showing
 every workspace number, it shows only the workspaces that are **occupied**
-(have windows open) or **focused**, with the title of each workspace's focused
+(have windows open) or **focused**, with the name of each workspace's focused
 window right next to its number.
 
 ```
@@ -10,11 +10,30 @@ window right next to its number.
 ```
 
 - Focused workspace: number highlighted in the accent color
-- Occupied workspaces: dimmed number + last focused window title
+- Occupied workspaces: dimmed number + focused window name
 - Focused-but-empty workspace: number only, no title
 - Empty workspaces are hidden entirely
 - Workspaces are scoped to the focused monitor
 - Vertical bars show numbers only
+
+## Naming
+
+Labels follow the HyDE naming convention. When a window title ends with its
+application's name, only the app name is shown:
+
+```
+"murdialthaf/omarchy-named-workspaces - Google Chrome"  →  Google Chrome
+"SomePage — Mozilla Firefox"                            →  Firefox
+"General - Discord"                                     →  Discord
+```
+
+Titles that don't end with an app name are shown as-is:
+
+```
+"OC | Omarchy website"  →  OC | Omarchy website
+```
+
+The full window title is always available in the hover tooltip.
 
 ## Install
 
