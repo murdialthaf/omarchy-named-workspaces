@@ -9,6 +9,8 @@ window right next to its number.
  2  Firefox       1  OC | Omarchy w…   3
 ```
 
+![Preview](preview.png)
+
 - Focused workspace: number highlighted in the accent color
 - Occupied workspaces: dimmed number + focused window name
 - Focused-but-empty workspace: number only, no title
