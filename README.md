@@ -6,7 +6,7 @@ every workspace number, it shows only the workspaces that are **occupied**
 window right next to its number.
 
 ```
- 2  Firefox       1  OC | Omarchy w…   3
+ 1  Firefox   2  Terminal   3
 ```
 
 ![Preview](preview.png)
